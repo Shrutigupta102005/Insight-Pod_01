@@ -97,3 +97,44 @@ export const logout = async (req, res) => {
     });
   }
 };
+
+export const addPreferences = async (req, res) => {
+  try {
+    const { userId } = req.user; 
+    const { preferences } = req.body;
+
+    // Validate input
+    if (!preferences || !Array.isArray(preferences)) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid or missing preferences. Expected an array.",
+      });
+    }
+
+    // Update user preferences
+    const user = await UserModel.findByIdAndUpdate(
+      userId,
+      { preferences },
+      { new: true, runValidators: true }
+    );
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found.",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Preferences added successfully.",
+      user,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Internal server error.",
+      error: error.message,
+    });
+  }
+};

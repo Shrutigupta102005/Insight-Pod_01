@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 const podcastSchema = new mongoose.Schema(
   {
-    id: { type: String, required: true },
+    _id: { type: String, required: true },
     title: { type: String, required: true },
     tags: [String],
     description: { type: String },
@@ -15,5 +15,5 @@ const podcastSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-const podcastModel = mongoose.model("Podcast", podcastSchema);
-export default podcastModel;
+const PodcastModel = mongoose.model("Podcast", podcastSchema);
+export default PodcastModel;

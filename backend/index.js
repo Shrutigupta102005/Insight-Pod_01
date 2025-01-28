@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import connectDB from "./utils/db.js";
 import dotenv from "dotenv";
 import userRouter from "./routes/user.routes.js";
+import podcastRouter from "./routes/podcast.routes.js";
 dotenv.config({});
 const app = express();
 // const corsOptions = {
@@ -18,7 +19,7 @@ app.use(cookieParser());
 app.use(cors());
 const PORT = 8000;
 app.use("/user", userRouter);
-
+app.use("/podcast" , podcastRouter)
 (async () => {
   await connectDB();
   app.listen(process.env.PORT || PORT, () => {
