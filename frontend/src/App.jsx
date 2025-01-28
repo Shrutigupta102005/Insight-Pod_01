@@ -1,35 +1,50 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from 'react';
+import { Music } from 'lucide-react';
+import Navigation from './components/Navigation';
+import AuthPage from './pages/AuthPage';
+import HomePage from './pages/HomePage';
+import PlayerPage from './pages/PlayerPage';
+import LeaderboardPage from './pages/LeaderboardPage';
+import CommunityPage from './pages/CommunityPage';
+import FeedbackPage from './pages/FeedbackPage';
+import 'animate.css';
+import Carousel from './pages/Carousel';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [currentPage, setCurrentPage] = useState('home');
+
+  const handleLogin = () => {
+    setIsAuthenticated(true);
+  };
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="gradient-bg min-h-screen text-white">
+      {!isAuthenticated ? (
+        <AuthPage onLogin={handleLogin} />
+      ) : (
+        <>
+          <Navigation 
+            currentPage={currentPage} 
+            onPageChange={setCurrentPage} 
+            onLogout={handleLogout}
+          />
+          <div className="pt-24">
+            {currentPage === 'home' && <HomePage />}
+            {currentPage === 'player' && <PlayerPage />}
+            {currentPage === 'leaderboard' && <LeaderboardPage />}
+            {currentPage === 'community' && <CommunityPage />}
+            {currentPage === 'feedback' && <FeedbackPage />}
+            {currentPage === 'carousel' && <Carousel></Carousel> }
+          </div>
+        </>
+      )}
+    </div>
+  );
 }
 
-export default App
+export default App;
