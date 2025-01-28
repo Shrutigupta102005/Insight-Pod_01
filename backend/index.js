@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 import userRouter from "./routes/user.routes.js";
 import podcastRouter from "./routes/podcast.routes.js";
 import langflowRouter from "./routes/langflow.routes.js";
+import leaderboardRouter from "./routes/leaderboard.js";
 dotenv.config({});
 const app = express();
 // const corsOptions = {
@@ -22,7 +23,7 @@ const PORT = 8000;
 app.use("/user", userRouter);
 app.use("/podcast", podcastRouter);
 app.use("/langflow", langflowRouter);
-
+app.use("/leaderboard", leaderboardRouter);
 (async () => {
   await connectDB();
   app.listen(process.env.PORT || PORT, () => {
