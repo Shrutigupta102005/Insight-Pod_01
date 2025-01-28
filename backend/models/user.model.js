@@ -1,4 +1,5 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose, { Types} from "mongoose";
+const ObjectId = Types.ObjectId;
 const userSchema = new mongoose.Schema(
   {
     name: {
@@ -20,7 +21,7 @@ const userSchema = new mongoose.Schema(
     },
     preferences: { type: [String], default: [""] },
     streak: { type: Number, default: 0 },
-    watchLater: { type: [ObjectId], ref: Podcasts, default: [] },
+    watchLater: { type: [ObjectId], ref: "Podcast", default: [] },
     totalPoints: { type: Number, default: 0 },
   },
   { timestamps: true }

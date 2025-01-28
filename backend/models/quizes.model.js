@@ -1,4 +1,5 @@
-import mongoose ,{Schema} from 'mongoose';
+import mongoose , {Types, Schema}from "mongoose";
+const ObjectId = Types.ObjectId;
 const quizSchema = new Schema({
   _id: { type: ObjectId, required: true },
   podcastId: { type: ObjectId, ref: Podcasts, required: true },

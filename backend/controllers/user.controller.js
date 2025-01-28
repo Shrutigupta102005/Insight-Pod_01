@@ -6,11 +6,10 @@ export const  register = async (req, res) => {
     const { name, email, password, phoneNumber} = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = await UserModel.create({
-      fullName,
+      name,
       email,
       password: hashedPassword,
       phoneNumber,
-      role,
     });
     res.status(201).json({
       success: true,
@@ -45,7 +44,7 @@ export const  register = async (req, res) => {
 
 export const login = async (req, res) => {
   try {
-    const { email, password, role } = req.body;
+    const { email, password } = req.body;
     const user = await UserModel.findOne({ email });
     if (!user) {
       return res.status(400).json({
@@ -58,12 +57,6 @@ export const login = async (req, res) => {
       return res.status(400).json({
         success: false,
         message: "Incorrect Email or Password. ",
-      });
-    }
-    if (role !== user.role) {
-      return res.status(400).json({
-        success: false,
-        message: "User is registered as" + user.role,
       });
     }
     const token = jwt.sign({ UserId: user._id }, process.env.SECRET_KEY, {
