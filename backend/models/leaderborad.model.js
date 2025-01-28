@@ -1,4 +1,5 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Types, Schema } from "mongoose";
+const ObjectId = Types.ObjectId;
 const leaderboardSchema = new Schema({
   _id: { type: ObjectId, required: true },
   userId: { type: ObjectId, ref: Users, required: true },
