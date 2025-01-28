@@ -64,3 +64,4 @@ export const syncLeaderboardWithUsers = async (req, res) => {
     res.status(500).json({ error: "Error syncing leaderboard" });
   }
 };
+    
