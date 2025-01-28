@@ -1,5 +1,5 @@
 import PodcastModel from "../models/podcast.model.js";
-import PodcastModel from "../models/podcast.model.js"; // Ensure the model is correctly imported
+import UserModel from "../models/user.model.js";
 
 export const createPodcast = async (req, res) => {
   try {
