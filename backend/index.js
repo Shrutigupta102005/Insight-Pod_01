@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cors());
 const PORT = 8000;
-// app.use("/user", userRouter);
+app.use("/user", userRouter);
 
 (async () => {
   await connectDB();
